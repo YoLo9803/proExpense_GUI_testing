@@ -24,6 +24,91 @@ CreateSingle
     Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
     Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
 
+CreateMulti
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Input    id=com.arduia.expense:id/edt_name    breakfast
+    Input    id=com.arduia.expense:id/edt_amount    777
+    Click    id=com.arduia.expense:id/imv_lock
+    Click    id=com.arduia.expense:id/btn_save
+    Input    id=com.arduia.expense:id/edt_name    salary
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.widget.TextView
+    Input    id=com.arduia.expense:id/edt_amount    777777
+    Click    id=com.arduia.expense:id/btn_save
+    Click    id=com.arduia.expense:id/imv_lock
+    Input    id=com.arduia.expense:id/edt_name    lunch
+    Input    id=com.arduia.expense:id/edt_amount    7777
+    Input    id=com.arduia.expense:id/edt_note    lunch
+    Click    id=com.arduia.expense:id/btn_save
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[3]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[2]/android.widget.TextView[1]    salary
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[3]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]    777,777
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[3]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]/android.widget.TextView[1]    lunch
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[3]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]/android.widget.LinearLayout/android.widget.TextView[1]    7,777
+
+CreateMultiUpperBoundary
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Click    id=com.arduia.expense:id/imv_lock
+    Input    id=com.arduia.expense:id/edt_name    shopping
+    Input    id=com.arduia.expense:id/edt_amount    2147483647
+    Click    id=com.arduia.expense:id/btn_save
+    Element Text Should Equals    id=com.arduia.expense:id/btn_save    NEXT
+
+CreateMultiLowerundary
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Click    id=com.arduia.expense:id/imv_lock
+    Input    id=com.arduia.expense:id/edt_name    shopping
+    Input    id=com.arduia.expense:id/edt_amount    -2147483647
+    Click    id=com.arduia.expense:id/btn_save
+    Element Text Should Equals    id=com.arduia.expense:id/btn_save    NEXT
+
+CreateMultiEmpty
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Click    id=com.arduia.expense:id/imv_lock
+    Input    id=com.arduia.expense:id/edt_name    shopping
+    Click    id=com.arduia.expense:id/btn_save
+    Element Text Should Equals    id=com.arduia.expense:id/btn_save    NEXT
+
+FilterAccounts
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Input    id=com.arduia.expense:id/edt_name    salary
+    Input    id=com.arduia.expense:id/edt_amount    777777
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.widget.TextView
+    Click    xpath=//android.widget.TextView[@content-desc="Calendar"]
+    Click    xpath=//android.view.View[@content-desc="01 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_save
+    Click    id=com.arduia.expense:id/fb_main_add
+    Input    id=com.arduia.expense:id/edt_name    shopping
+    Input    id=com.arduia.expense:id/edt_amount    7777
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[5]/android.widget.TextView
+    Click    xpath=//android.widget.TextView[@content-desc="Calendar"]
+    Click    xpath=//android.view.View[@content-desc="28 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_save
+    Enter Expense Logs
+    # filter salary
+    Click    xpath=//android.widget.TextView[@content-desc="Filter"]
+    Click    id=com.arduia.expense:id/tv_end_day
+    Click    xpath=//android.view.View[@content-desc="01 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_apply_filter
+    Element Text Should Equals      xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
+    # filter shopping
+    Click    xpath=//android.widget.TextView[@content-desc="Filter"]
+    Click    id=com.arduia.expense:id/tv_start_day
+    Click    xpath=//android.view.View[@content-desc="25 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/tv_end_day
+    Click    xpath=//android.view.View[@content-desc="28 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_apply_filter
+    Element Text Should Equals     xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]     shopping
+
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
@@ -37,3 +122,22 @@ Open ProExpense
     Click Element    id=com.arduia.expense:id/tv_currency
     Wait Until Page Contains Element    id=com.arduia.expense:id/btn_continue    5000    not_find_element
     Click Element    id=com.arduia.expense:id/btn_continue
+
+Click
+    [Arguments]     ${element}
+    Wait Until Page Contains Element    ${element}    5
+    Click Element    ${element}
+
+Input
+    [Arguments]     ${element}      ${inputText}
+    Wait Until Page Contains Element    ${element}    5
+    Input Text    ${element}    ${inputText}
+
+Element Text Should Equals
+    [Arguments]     ${element}      ${trueText}
+    Wait Until Page Contains Element    ${element}    5
+    Element Text Should Be    ${element}    ${trueText}
+
+Enter Expense Logs
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Click    id=com.arduia.expense:id/tv_outcome_value
