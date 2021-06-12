@@ -5,7 +5,7 @@ Library           AppiumLibrary
 ${REMOTE_URL}     http://127.0.0.1:4723/wd/hub
 ${PLATFORM_NAME}    Android
 ${PLATFORM_VERSION}    10.0
-${DEVICE_NAME}    emuilator-5554
+${DEVICE_NAME}    emulator-5554
 ${ACTIVITY_NAME}    com.arduia.expense.ui.MainActivity
 ${PACKAGE_NAME}    com.arduia.expense
 
@@ -108,6 +108,225 @@ FilterAccounts
     Click    id=com.arduia.expense:id/btn_apply_filter
     Element Text Should Equals     xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]     shopping
 
+
+EditAccount
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_amount    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    180
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_name    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    dinner
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    180
+
+EditAccountWithUpperBound
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    2147483647
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    Amount
+
+EditAccountWithLowerBound
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    -2147483648
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    Amount
+
+EditAccountWithString
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    fifty
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    Amount
+
+EditAccountWithEmpty
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    ${EMPTY}
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    Amount
+
+EditAccountWithRotate
+    #should succeed when edit text existed after rotate
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    180
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
+
+EditAccountWithExitAndReenter
+    #should succeed when edit text existed after exit and reenter
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    180
+    Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
+    Execute Adb Shell    input keyevent KEYCODE_BACK
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name
+    Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
+
+ImportBackupFile
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
+    Input Text    id=com.arduia.expense:id/edt_note    encheng's lee yen buffet
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_title
+    Click Element    id=com.arduia.expense:id/tv_title
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.cardview.widget.CardView[1]/android.widget.RelativeLayout
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.cardview.widget.CardView[1]/android.widget.RelativeLayout
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_export_now
+    Click Element    id=com.arduia.expense:id/btn_export_now
+    Wait Until Page Contains Element    id=android:id/button1
+    Click Element    id=android:id/button1
+    # Imprt File
+    Open ProExpense
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_title
+    Click Element    id=com.arduia.expense:id/tv_title
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.cardview.widget.CardView[2]/android.widget.RelativeLayout
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/androidx.cardview.widget.CardView[2]/android.widget.RelativeLayout
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/com.google.android.material.card.MaterialCardView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView[1]
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/com.google.android.material.card.MaterialCardView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView[1]
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_import
+    Click Element    id=com.arduia.expense:id/btn_import
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.CheckedTextView
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.CheckedTextView
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_name
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
 
 *** Keywords ***
 Open ProExpense
