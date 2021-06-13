@@ -902,6 +902,7 @@ Get Element Y
 
 Continous Click
     [Arguments]    ${element}
+    Wait Until Page Contains Element    ${element}    20
     ${x}=    Get Element X    ${element}
     ${y}=    Get Element Y    ${element}
     Click A Point    ${x+20}    ${y+20}    1
@@ -950,4 +951,4 @@ Add Tested Account
 
 Tear Down
     Close Application
-    Sleep    5
+    Sleep    10
