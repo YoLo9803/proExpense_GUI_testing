@@ -743,10 +743,19 @@ SetLanguageWithRotate
     ${Edit Text}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/androidx.cardview.widget.CardView/android.widget.EditText
     Wait Until Page Contains Element    ${Edit Text}    5000
     Input Text    ${Edit Text}    ch
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    Landscape
+    Sleep    2
+    Portrait
     Wait Until Page Contains Element    ${Edit Text}
     Element Text Should Be    ${Edit Text}    ch
+    Sleep    2
+    Element Text Should Be    id=com.arduia.expense:id/tv_language_name    China (Chinese)
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rl_language    5000
+    Click Element    id=com.arduia.expense:id/rl_language
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_restart    5000
+    Click Element    id=com.arduia.expense:id/btn_restart
+    Sleep    2
+    Element Text Should Be    ${Title}    主页
 
 SetLanguageWithExitAndReenter
     Open ProExpense
@@ -849,8 +858,9 @@ SetCurrencyWithRotate
     ${Edit Text}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/androidx.cardview.widget.CardView/android.widget.EditText
     Wait Until Page Contains Element    ${Edit Text}    5000
     Input Text    ${Edit Text}    ${Currency}
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    Landscape
+    Sleep    2
+    Portrait
     Element Text Should Be    ${Edit Text}    ${Currency}
     Wait Until Page Contains Element    id=com.arduia.expense:id/tv_currency    5000
     Element Text Should Be    id=com.arduia.expense:id/tv_currency    ${Currency}
