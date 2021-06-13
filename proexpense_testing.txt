@@ -438,6 +438,39 @@ LunchAppAndAtWelcomeScreen
     Element Text Should Be    ${United States Language}    United States(English)
     Element Text Should Be    ${China Language}    China (Chinese)
 
+ExportData
+    Open ProExpense
+    ${Name}=    Set Variable    lunch
+    ${Amount}=    Set Variable    200
+    ${Note}=    Set Variable    my lunch
+    ${File Name}=    Set Variable    test_export
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    ${Name}
+    Input Text    id=com.arduia.expense:id/edt_amount    ${Amount}
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView    
+    Input Text    id=com.arduia.expense:id/edt_note    ${Note}
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    ${Name}
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${Amount}
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    id=com.arduia.expense:id/dest_backup
+    Click Element    id=com.arduia.expense:id/dest_backup
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cv_export
+    Click Element    id=com.arduia.expense:id/cv_export
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name
+    Input Text    id=com.arduia.expense:id/edt_name    ${File Name}
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_export_now
+    Click Element    id=com.arduia.expense:id/btn_export_now
+    Wait Until Page Contains Element    id=android:id/button1
+    Click Element    id=android:id/button1
+    ${Exported File Name}=    Set Variable    id=com.arduia.expense:id/tv_backup_name
+    Wait Until Page Contains Element    ${Exported File Name}    5000
+    Element Text Should Be    ${Exported File Name}    ${File Name}
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
