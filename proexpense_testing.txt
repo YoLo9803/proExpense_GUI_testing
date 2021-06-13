@@ -99,7 +99,7 @@ CreateSingleAccountEmpty
     ${OutComeValue}=    Set Variable    com.arduia.expense:id/tv_outcome_value
     Element Should Contain Text    ${OutComeValue}    0
 
-CreateSingleContinousClick
+CreateSingleAccountContinousClick
     Open ProExpense
     ${name}=    Set Variable    lunch
     ${amount}=    Set Variable    120
@@ -116,11 +116,85 @@ CreateSingleContinousClick
     ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
     Input Text    ${NoteField}    ${description}
     ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
-    Continous Click A Element    ${SaveButton}
+    Continous Click    ${SaveButton}
     ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
     Wait Until Page Contains Element    ${HistoryList}    5000
     Element Text Should Be    id=com.arduia.expense:id/tv_name    ${name}
     Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${amount}
+
+CreateSingleAccountRotate
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    120
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
+    ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
+    Input Text    ${NoteField}    ${description}
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Click    ${SaveButton}
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    ${name}
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${amount}
+
+CreateSingleAccountExitAndReenter
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    120
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
+    ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
+    Input Text    ${NoteField}    ${description}
+    Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
+    Execute Adb Shell    input keyevent KEYCODE_BACK
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Click Element    ${SaveButton}
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    ${name}
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${amount}
+
+DeleteAccount
+    Add Tested Account
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Click    ${HistoryList}
+    ${deleteButton}=    Set Variable    id=com.arduia.expense:id/btn_delete
+    Click    ${deleteButton}
+    ${confirmButton}    Set Variable    id=com.arduia.expense:id/btn_confirm
+    Click    ${confirmButton}
+    ${OutComeValue}=    Set Variable    com.arduia.expense:id/tv_outcome_value
+    Element Should Contain Text    ${OutComeValue}    0
+
+DeleteAccountContinousClick
+    Add Tested Account
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Click    ${HistoryList}
+    ${deleteButton}=    Set Variable    id=com.arduia.expense:id/btn_delete
+    Click    ${deleteButton}
+    ${confirmButton}    Set Variable    id=com.arduia.expense:id/btn_confirm
+    Continous Click    ${confirmButton}
+    ${OutComeValue}=    Set Variable    com.arduia.expense:id/tv_outcome_value
+    Element Should Contain Text    ${OutComeValue}    0
 
 CreateMulti
     Open ProExpense
@@ -194,7 +268,7 @@ FilterAccounts
     Click    xpath=//android.view.View[@content-desc="01 June 2021"]
     Click    id=android:id/button1
     Click    id=com.arduia.expense:id/btn_apply_filter
-    Element Text Should Equals      xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
     # filter shopping
     Click    xpath=//android.widget.TextView[@content-desc="Filter"]
     Click    id=com.arduia.expense:id/tv_start_day
@@ -204,8 +278,7 @@ FilterAccounts
     Click    xpath=//android.view.View[@content-desc="28 June 2021"]
     Click    id=android:id/button1
     Click    id=com.arduia.expense:id/btn_apply_filter
-    Element Text Should Equals     xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]     shopping
-
+    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    shopping
 
 EditAccount
     Open ProExpense
@@ -452,7 +525,7 @@ Get Element Y
     ${result}=    Get From Dictionary    ${Location}    y
     [Return]    ${result}
 
-Continous Click A Element
+Continous Click
     [Arguments]    ${element}
     ${x}=    Get Element X    ${element}
     ${y}=    Get Element Y    ${element}
@@ -461,20 +534,41 @@ Continous Click A Element
     Click A Point    ${x+20}    ${y+20}    1
 
 Click
-    [Arguments]     ${element}
+    [Arguments]    ${element}
     Wait Until Page Contains Element    ${element}    5
     Click Element    ${element}
 
 Input
-    [Arguments]     ${element}      ${inputText}
+    [Arguments]    ${element}    ${inputText}
     Wait Until Page Contains Element    ${element}    5
     Input Text    ${element}    ${inputText}
 
 Element Text Should Equals
-    [Arguments]     ${element}      ${trueText}
+    [Arguments]    ${element}    ${trueText}
     Wait Until Page Contains Element    ${element}    5
     Element Text Should Be    ${element}    ${trueText}
 
 Enter Expense Logs
     Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
     Click    id=com.arduia.expense:id/tv_outcome_value
+
+Add Tested Account
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    120
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
+    ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
+    Input Text    ${NoteField}    ${description}
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Click Element    ${SaveButton}
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
