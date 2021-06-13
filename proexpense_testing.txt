@@ -426,6 +426,18 @@ ImportBackupFile
     Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
     Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
 
+LunchAppAndAtWelcomeScreen
+    Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_welcome    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_welcome    Hello! Welcome to Pro Expense
+    Element Text Should Be    id=com.arduia.expense:id/tv_lang    Choose Language
+    ${Myamar Language}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.RelativeLayout/android.widget.TextView
+    ${United States Language}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.widget.RelativeLayout/android.widget.TextView
+    ${China Language}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.viewpager.widget.ViewPager/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[3]/android.widget.RelativeLayout/android.widget.TextView
+    Element Text Should Be    ${Myamar Language}    Myanmar(Burma)
+    Element Text Should Be    ${United States Language}    United States(English)
+    Element Text Should Be    ${China Language}    China (Chinese)
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
