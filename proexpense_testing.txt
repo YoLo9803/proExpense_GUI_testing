@@ -389,11 +389,11 @@ FilterAccountsWithRotation
     Click    id=com.arduia.expense:id/tv_end_day
     Click    xpath=//android.view.View[@content-desc="01 June 2021"]
     Click    id=android:id/button1
-    Click    id=com.arduia.expense:id/btn_apply_filter
     # rotation
     Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
     Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
-    Element Text Should Equals    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
+    Click    id=com.arduia.expense:id/btn_apply_filter
+    Element Text Should Equals      xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
 
 EditAccount
     Open ProExpense
