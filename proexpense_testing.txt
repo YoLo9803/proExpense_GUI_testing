@@ -576,6 +576,26 @@ SetLanguageWithExitAndReenter
     Wait Until Page Contains Element    ${Edit Text}
     Element Text Should Be    ${Edit Text}    ch
 
+SetCurrency
+    Open ProExpense
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton    5000
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    id=com.arduia.expense:id/dest_settings    5000
+    Click Element    id=com.arduia.expense:id/dest_settings
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fl_currency    5000
+    Click Element    id=com.arduia.expense:id/fl_currency
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.view.ViewGroup    5000
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.view.ViewGroup
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element     xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton    5000
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element     id=com.arduia.expense:id/dest_home    5000
+    Click Element    id=com.arduia.expense:id/dest_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/tv_income_symobol    5000
+    Click Element    id=com.arduia.expense:id/tv_income_symobol
+    Element Text Should Be    id=com.arduia.expense:id/tv_income_symobol    EUR
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
