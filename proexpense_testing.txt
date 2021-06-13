@@ -1,5 +1,6 @@
 *** Settings ***
 Library           AppiumLibrary
+Library           Collections
 
 *** Variables ***
 ${REMOTE_URL}     http://127.0.0.1:4723/wd/hub
@@ -10,19 +11,116 @@ ${ACTIVITY_NAME}    com.arduia.expense.ui.MainActivity
 ${PACKAGE_NAME}    com.arduia.expense
 
 *** Test Cases ***
-CreateSingle
+CreateSingleAccount
     Open ProExpense
-    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
-    Click Element    id=com.arduia.expense:id/fb_main_add
-    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
-    Input Text    id=com.arduia.expense:id/edt_name    lunch
-    Input Text    id=com.arduia.expense:id/edt_amount    120
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    120
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
     Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
-    Input Text    id=com.arduia.expense:id/edt_note    encheng's lee yen buffet
-    Click Element    id=com.arduia.expense:id/btn_save
-    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
-    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
-    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
+    Input Text    ${NoteField}    ${description}
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Click Element    ${SaveButton}
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    ${name}
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${amount}
+
+CreateSingleAccountUpperBound
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    2147483647
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Element Text Should Be    ${AmountField}    Amount
+
+CreateSingleAccountLowerBound
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    -2147483648
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Element Text Should Be    ${AmountField}    Amount
+
+CreateSingleAccountString
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    thirty
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Element Text Should Be    ${AmountField}    Amount
+
+CreateSingleAccountEmpty
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    thirty
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Element Text Should Be    ${AmountField}    Amount
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Click Element    ${SaveButton}
+    Go Back
+    ${OutComeValue}=    Set Variable    com.arduia.expense:id/tv_outcome_value
+    Element Should Contain Text    ${OutComeValue}    0
+
+CreateSingleContinousClick
+    Open ProExpense
+    ${name}=    Set Variable    lunch
+    ${amount}=    Set Variable    120
+    ${description}=    Set Variable    encheng's lee yen buffet
+    ${AddNewButton}=    Set Variable    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    ${AddNewButton}    5000
+    Click Element    ${AddNewButton}
+    ${NameField}=    Set Variable    id=com.arduia.expense:id/edt_name
+    Wait Until Page Contains Element    ${NameField}    5000
+    Input Text    ${NameField}    ${name}
+    ${AmountField}=    Set Variable    id=com.arduia.expense:id/edt_amount
+    Input Text    ${AmountField}    ${amount}
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[1]/android.widget.TextView
+    ${NoteField}=    Set Variable    id=com.arduia.expense:id/edt_note
+    Input Text    ${NoteField}    ${description}
+    ${SaveButton}=    Set Variable    id=com.arduia.expense:id/btn_save
+    Continous Click A Element    ${SaveButton}
+    ${HistoryList}=    Set Variable    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    ${HistoryList}    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    ${name}
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    ${amount}
 
 EditAccount
     Open ProExpense
@@ -147,32 +245,6 @@ EditAccountWithEmpty
     Click Element    id=com.arduia.expense:id/btn_save
     Element Text Should Be    id=com.arduia.expense:id/edt_amount    Amount
 
-EditAccountWithRotate
-    #should succeed when edit text existed after rotate
-    Open ProExpense
-    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
-    Click Element    id=com.arduia.expense:id/rv_home
-    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
-    Click Element    id=com.arduia.expense:id/fb_main_add
-    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
-    Input Text    id=com.arduia.expense:id/edt_name    lunch
-    Input Text    id=com.arduia.expense:id/edt_amount    120
-    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
-    Click Element    id=com.arduia.expense:id/btn_save
-    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
-    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
-    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
-    Click Element    id=com.arduia.expense:id/cd_expense
-    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
-    Click Element    id=com.arduia.expense:id/btn_edit
-    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
-    Input Text    id=com.arduia.expense:id/edt_name    dinner
-    Input Text    id=com.arduia.expense:id/edt_amount    180
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
-    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
-    Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
-    Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
-
 EditAccountWithExitAndReenter
     #should succeed when edit text existed after exit and reenter
     Open ProExpense
@@ -197,6 +269,32 @@ EditAccountWithExitAndReenter
     Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
     Execute Adb Shell    input keyevent KEYCODE_BACK
     Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name
+    Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
+    Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
+
+EditAccountWithRotate
+    #should succeed when edit text existed after rotate
+    Open ProExpense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
+    Click Element    id=com.arduia.expense:id/rv_home
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fb_main_add    5000
+    Click Element    id=com.arduia.expense:id/fb_main_add
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    lunch
+    Input Text    id=com.arduia.expense:id/edt_amount    120
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_save    5000
+    Click Element    id=com.arduia.expense:id/btn_save
+    Wait Until Page Contains Element    id=com.arduia.expense:id/cd_expense    5000
+    Element Text Should Be    id=com.arduia.expense:id/tv_name    lunch
+    Element Text Should Be    id=com.arduia.expense:id/tv_amount    120
+    Click Element    id=com.arduia.expense:id/cd_expense
+    Wait Until Page Contains Element    id=com.arduia.expense:id/btn_edit    5000
+    Click Element    id=com.arduia.expense:id/btn_edit
+    Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name    5000
+    Input Text    id=com.arduia.expense:id/edt_name    dinner
+    Input Text    id=com.arduia.expense:id/edt_amount    180
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
     Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
     Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
 
@@ -256,3 +354,23 @@ Open ProExpense
     Click Element    id=com.arduia.expense:id/tv_currency
     Wait Until Page Contains Element    id=com.arduia.expense:id/btn_continue    5000    not_find_element
     Click Element    id=com.arduia.expense:id/btn_continue
+
+Get Element X
+    [Arguments]    ${element}
+    ${Location}=    Get Element Location    ${element}
+    ${result}=    Get From Dictionary    ${Location}    x
+    [Return]    ${result}
+
+Get Element Y
+    [Arguments]    ${element}
+    ${Location}=    Get Element Location    ${element}
+    ${result}=    Get From Dictionary    ${Location}    y
+    [Return]    ${result}
+
+Continous Click A Element
+    [Arguments]    ${element}
+    ${x}=    Get Element X    ${element}
+    ${y}=    Get Element Y    ${element}
+    Click A Point    ${x+20}    ${y+20}    1
+    Click A Point    ${x+20}    ${y+20}    1
+    Click A Point    ${x+20}    ${y+20}    1
