@@ -315,14 +315,18 @@ CreateMultiAccountsWithExitAndReenter
     Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.widget.TextView
     # exit and reenter
     Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
+    Sleep    2
     Execute Adb Shell    input keyevent KEYCODE_BACK
+    Sleep    2
     Go Back
     Click    id=com.arduia.expense:id/btn_save
     Input    id=com.arduia.expense:id/edt_name    lunch
     Input    id=com.arduia.expense:id/edt_amount    7777
     # exit and reenter
     Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
+    Sleep    2
     Execute Adb Shell    input keyevent KEYCODE_BACK
+    Sleep    2
     Go Back
     Click    id=com.arduia.expense:id/btn_save
     Go Back
@@ -543,7 +547,9 @@ EditAccountWithExitAndReenter
     Input Text    id=com.arduia.expense:id/edt_name    dinner
     Input Text    id=com.arduia.expense:id/edt_amount    180
     Execute Adb Shell    input keyevent KEYCODE_APP_SWITCH
+    Sleep    2
     Execute Adb Shell    input keyevent KEYCODE_BACK
+    Sleep    2
     Wait Until Page Contains Element    id=com.arduia.expense:id/edt_name
     Element Text Should Be    id=com.arduia.expense:id/edt_name    dinner
     Element Text Should Be    id=com.arduia.expense:id/edt_amount    180
