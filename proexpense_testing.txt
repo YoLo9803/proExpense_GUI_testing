@@ -291,6 +291,36 @@ FilterAccounts
     Click    id=com.arduia.expense:id/btn_apply_filter
     Element Text Should Equals     xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]     shopping
 
+FilterAccountsWithRotation
+    Open ProExpense
+    Click    id=com.arduia.expense:id/fb_main_add
+    Input    id=com.arduia.expense:id/edt_name    salary
+    Input    id=com.arduia.expense:id/edt_amount    777777
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[2]/android.widget.TextView
+    Click    xpath=//android.widget.TextView[@content-desc="Calendar"]
+    Click    xpath=//android.view.View[@content-desc="01 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_save
+    Click    id=com.arduia.expense:id/fb_main_add
+    Input    id=com.arduia.expense:id/edt_name    shopping
+    Input    id=com.arduia.expense:id/edt_amount    7777
+    Click    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/androidx.cardview.widget.CardView[5]/android.widget.TextView
+    Click    xpath=//android.widget.TextView[@content-desc="Calendar"]
+    Click    xpath=//android.view.View[@content-desc="28 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_save
+    Enter Expense Logs
+    # filter salary
+    Click    xpath=//android.widget.TextView[@content-desc="Filter"]
+    Click    id=com.arduia.expense:id/tv_end_day
+    Click    xpath=//android.view.View[@content-desc="01 June 2021"]
+    Click    id=android:id/button1
+    Click    id=com.arduia.expense:id/btn_apply_filter
+    # rotation
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    Element Text Should Equals      xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView[1]    salary
+
 EditAccount
     Open ProExpense
     Wait Until Page Contains Element    id=com.arduia.expense:id/rv_home    5000
