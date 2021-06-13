@@ -538,6 +538,25 @@ SetLanguageByManualInput
     Sleep   5
     Element Text Should Be    ${Title}    主页
 
+SetLanguageWithRotate
+    Open ProExpense
+    ${Title}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView
+    Wait Until Page Contains Element    ${Title}    5000
+    Element Text Should Be    ${Title}    Home
+    Wait Until Page Contains Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton    5000
+    Click Element    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton
+    Wait Until Page Contains Element    id=com.arduia.expense:id/dest_settings    5000
+    Click Element    id=com.arduia.expense:id/dest_settings
+    Wait Until Page Contains Element    id=com.arduia.expense:id/fl_language    5000
+    Click Element    id=com.arduia.expense:id/fl_language
+    ${Edit Text}=    Set Variable    xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/androidx.cardview.widget.CardView/android.widget.EditText
+    Wait Until Page Contains Element    ${Edit Text}    5000
+    Input Text    ${Edit Text}    ch
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+    Execute Adb Shell    content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+    Wait Until Page Contains Element    ${Edit Text}
+    Element Text Should Be    ${Edit Text}    ch
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
