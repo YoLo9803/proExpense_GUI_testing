@@ -880,6 +880,16 @@ SetCurrencyWithRotate
     Click Element    id=com.arduia.expense:id/tv_income_symobol
     Element Text Should Be    id=com.arduia.expense:id/tv_income_symobol    EUR
 
+UninstallApp
+    Open ProExpense
+    ${Execute Result}=    Execute Adb Shell     pm list packages -3 | grep ${PACKAGE_NAME} || echo
+    Should Be Equal    ${Execute Result}    package:${PACKAGE_NAME}${\n}
+    ${Execute Result}=    Execute Adb Shell     pm uninstall --user 0 ${PACKAGE_NAME}  || echo
+    Should Be Equal    ${Execute Result}    Success${\n}
+    Sleep   1
+    ${Execute Result}=    Execute Adb Shell     pm list packages -3 | grep ${PACKAGE_NAME} || echo
+    Should Be Equal    ${Execute Result}    ${\n}
+
 *** Keywords ***
 Open ProExpense
     Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    automationName=UiAutomator2    appActivity=${ACTIVITY_NAME}    appPackage=${PACKAGE_NAME}
